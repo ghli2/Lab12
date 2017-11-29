@@ -1,8 +1,11 @@
+/** Does things. */
+import java.util.Arrays;
 /**
  * Class printing out the intersection of two sorted arrays.
  *
  * @see <a href="https://cs125.cs.illinois.edu/lab/12/">Lab 12 Description</a>
  */
+@SuppressWarnings("checkstyle:all")
 public class IntersectionOfTwoSortedArray {
 	/**
 	 * Main method for testing.
@@ -68,6 +71,20 @@ public class IntersectionOfTwoSortedArray {
 	 * @return the intersection of the two arrays, empty array is no intersection
 	 */
 	public static int[] intersection(final int[] array1, final int[] array2) {
-		return new int[0];
+        int count = 0;
+        for (int x : array1) {
+            if (Arrays.asList(array2).contains(x)) {
+                ++count;
+            }
+        }
+        int[] kek = new int[count];
+        int i = 0;
+        for (int x : array1) {
+            if (Arrays.asList(array2).contains(x)) {
+                kek[i++] = x;
+            }
+        }
+        return kek;
+         
 	}
 }
