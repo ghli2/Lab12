@@ -1,5 +1,6 @@
 /** Does things. */
 import java.util.Arrays;
+import java.util.ArrayList;
 /**
  * Class printing out the intersection of two sorted arrays.
  *
@@ -71,20 +72,20 @@ public class IntersectionOfTwoSortedArray {
 	 * @return the intersection of the two arrays, empty array is no intersection
 	 */
 	public static int[] intersection(final int[] array1, final int[] array2) {
-        int count = 0;
-        for (int x : array1) {
-            if (Arrays.asList(array2).contains(x)) {
-                ++count;
+        ArrayList<Integer> a1 = new ArrayList<>(array1.length);
+        ArrayList<Integer> a2 = new ArrayList<>(array2.length);
+        ArrayList<Integer> o = new ArrayList<>();
+        for (int x : array1)
+            a1.add(x);
+        for (int x : array2)
+            a2.add(x);
+        for(int i = array1.length-1; i >= 0; --i) {
+            if (a2.contains(a1.get(i))) {
+                o.add(a1.get(i));
+                a2.remove(a1.get(i));
+                a1.remove(i);
             }
         }
-        int[] kek = new int[count];
-        int i = 0;
-        for (int x : array1) {
-            if (Arrays.asList(array2).contains(x)) {
-                kek[i++] = x;
-            }
-        }
-        return kek;
-         
+        return Arrays.stream(o.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();   
 	}
 }
